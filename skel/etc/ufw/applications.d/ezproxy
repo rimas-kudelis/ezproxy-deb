@@ -1,0 +1,14 @@
+[EZproxy HTTP]
+title=EZproxy Server (HTTP)
+description=Connect users to content they want
+ports=80/tcp
+
+[Nginx HTTPS]
+title=EZproxy Server (HTTPS)
+description=Connect users to content they want
+ports=443/tcp
+
+[Nginx Full]
+title=EZproxy Server (HTTP + HTTPS)
+description=Connect users to content they want
+ports=80,443/tcp

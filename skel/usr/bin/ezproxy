@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# Runs ezproxy with its working directory specified as /var/lib/ezproxy
+
+realbinary=/usr/bin/ezproxy.real
+
+if ! [ -f "${realbinary}" -a -x "${realbinary}" ]; then
+  echo "The actual ezproxy executable (${realbinary}) not found. Exiting."
+  exit 1
+fi
+
+exec ${realbinary} -d /var/lib/ezproxy "$@"

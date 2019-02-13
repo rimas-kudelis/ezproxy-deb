@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+  configure)
+    confdir="/etc/ezproxy"
+    homedir="/var/lib/ezproxy"
+    logdir="/var/log/ezproxy"
+    username="ezproxy"
+    service="/etc/init.d/ezproxy"
+
+    # Create the ezproxy user
+    adduser --system \
+	    --home /var/lib/ezproxy \
+	    --group \
+	    $username
+
+    # Symlink files from etc to homedir
+    ln -s $confdir/* $homedir || true
+
+    # Set directory permissions
+    chown $username:adm $homedir
+    chmod 755 $homedir
+    chown $username:adm $logdir
+    chmod 755 $logdir
+    chown -R root:$username $confdir
+    chgrp -R $username $confdir
+
+    ;;
+
+  abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ]; then
+  if [ -x "/etc/init.d/ezproxy" ]; then
+    update-rc.d ezproxy defaults >/dev/null || exit $?
+  fi
+fi
+
+exit 0

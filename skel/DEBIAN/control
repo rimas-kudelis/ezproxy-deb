@@ -1,0 +1,15 @@
+Package: ezproxy
+Version: %VERSION%
+Section: httpd
+Priority: optional
+Architecture: i386
+Depends: libc6
+Maintainer: %MAINTAINER%
+Homepage: https://www.oclc.org/en/ezproxy.html
+Description: EZproxy proxy server
+  EZproxy access and authentication software allows your library to deliver e-content
+  simply and effectively. EZproxy facilitates a single sign-in to e-content using
+  existing library-issued credentials, such as a library card number and PIN or
+  username and password.
+  .
+  This package provides a somewhat Debianized way to instal EZproxy.

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:	  ezproxy
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts or stops EZproxy
+# Description:       starts or stops the EZproxy daemon
+### END INIT INFO
+
+if [ -z "$1" ]
+then
+  echo "Usage: $0 {start|stop|restart|bounce|status}"
+  exit 1
+fi
+
+su - ezproxy -c "/usr/bin/ezproxy $*"
